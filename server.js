@@ -19,11 +19,11 @@ app.use(express.json());
 // Static Files
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", { useNewUrlParser: true });
 
 //Routes
-require('./controllers/api-routes')
-require('./controllers/html-routes')
+require('./controllers/api-routes')(app);
+require('./controllers/html-routes')(app);
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`)

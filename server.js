@@ -19,7 +19,7 @@ app.use(express.json());
 // Static Files
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", { useNewUrlParser: true, useUnifiedTopology: true });
 
 //Routes
 require('./controllers/api-routes')(app);

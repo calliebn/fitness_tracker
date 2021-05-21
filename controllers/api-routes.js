@@ -29,25 +29,14 @@ module.exports = function (app) {
     app.put('/api/workouts/:id', ({ body, params }, res) => {
         const workoutID = params.id;
         let savedExercises = [];
-        // Gets all of the saved exercises in the current workout
-        // db.Workout.find({ _id: workoutID })
-        //     .then(dbWorkout => {
-        //         savedExercises = dbWorkout[0].exercises;
-        //         res.json(dbWorkout[0].exercises);
-        //         let allExercises = [...savedExercises, body]
-        // updateWorkout(allExercises)
-        // })
-        // .catch(err => {
-        //     res.json(err);
-        // });
 
-        // function updateWorkout(exercises) {
         db.Workout.findByIdAndUpdate(workoutID, { $push: { exercises: body } }, function (err, doc) {
             if (err) {
                 console.log(err)
+            } else {
+                res.json(doc);
             }
         })
-        // }
     })
 
     app.get('/api/workouts/range', (req, res) => {
